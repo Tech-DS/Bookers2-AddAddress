@@ -1,0 +1,47 @@
+   <div class="comment-list bt style-2" id="comments">
+            
+<ol>
+  <% book.book_comments.each do |book_comment| %>
+    <li class="comment">
+      <div class="comment-body bb">
+        <div class="comment-avatar">
+          <div class="avatar">
+           <%= attachment_image_tag book_comment.user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg" %>
+          </div>
+        </div>
+        <div class="comment-text">
+          <div class="comment-author clearfix">
+            <a href="#" class="link-author"><%= book_comment.user.name %></a>
+            <span class="comment-meta">
+              <span class="comment-date"><%= book_comment.created_at.strftime('%Y/%m/%d') %></span>
+            </span>
+          </div>
+          <div class="comment-entry"><%= book_comment.comment %></div>
+          <% if book_comment.user == current_user %>
+            <div>
+              <%= link_to "削除", book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-danger pull-right" %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ol>
+          </div>
+          <hr>
+
+          <!-- Add comment section -->
+          <div class="section-title-wrapper style-1 v1 mt-30" id="divAddComment">
+            <h3 class="section-title left">
+              <span>コメント</span>
+            </h3>
+          </div>
+          <%= form_with(model:[book, book_comment], local: true) do |f| %>
+            <div class="row">
+              <div class="col-sm-12">
+                <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+              </div>
+            </div>
+            <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+          <% end %>

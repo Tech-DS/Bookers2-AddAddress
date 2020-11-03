@@ -46,8 +46,21 @@
 					</td>
 					<td><%= link_to book.title, book_path(book), class: "book_#{book.id}" %></td>
 					<td><%= book.body %></td>
+					<%= render 'books/favorites', book: book%>
+				    
+				    
+				    <td>
+				     <ul class="inline-meta">
+                        <%= link_to "コメント数　#{book.book_comments.count}", book_path(book.id) %>
+                       </li>
+                     </ul>
+                    </td>
+				    
+				    
 				</tr>
 				<% end %>
+	
+            
 			</tbody>
 		</table>
 
@@ -56,3 +69,4 @@
 
 	</div>
 </div>
+
