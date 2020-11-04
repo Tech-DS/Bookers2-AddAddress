@@ -6,7 +6,7 @@ class BookCommentsController < ApplicationController
    if comment.save
      redirect_back(fallback_location: books_path)
  　else
-　   redirect_back(fallback_location: books_path)
+　   render 'books/show'
 　 end
   end
 
