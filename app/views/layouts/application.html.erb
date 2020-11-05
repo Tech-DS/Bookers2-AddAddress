@@ -14,6 +14,22 @@
 
     <div class="container">
       <p id="notice"><%= notice %></p>
+      
+      
+      
+  <center>
+  <% if user_signed_in? %>
+     <%= form_with url: search_path, method: :get, local: true do |form| %>
+       <%= form.text_field :word %>
+       <%= form.select 'range' , options_for_select([['---選択してください---', ''], ['User', '1'], ['Book', '2']]) %>
+       <%= form.select'search', options_for_select([["前方一致","forward_match"], ["後方一致","backward_match"], ["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
+       <%= form.submit "検索" %>
+       <% end %>
+  <% end %>
+  </center> 
+      
+      
+      
       <%= yield %>
     </div>
 
